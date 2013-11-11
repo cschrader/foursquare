@@ -46,7 +46,7 @@ NUM_REQUEST_RETRIES = 3
 MAX_MULTI_REQUESTS = 5
 
 # Keyworded Arguments passed to the httplib2.Http() request
-HTTP_KWARGS = {disable_ssl_certificate_validation=True}
+HTTP_KWARGS = {}
 
 
 # Generic foursquare exception
@@ -716,7 +716,8 @@ def _request_with_retry(url, headers={}, data=None):
 
 def _process_request_with_httplib2(url, headers={}, data=None):
     """Make the request and handle exception processing"""
-    h = httplib2.Http(**HTTP_KWARGS)
+#    h = httplib2.Http(**HTTP_KWARGS)
+    h = httplib2.Http(disable_ssl_certificate_validation=True)
     try:
         if data:
             datagen, multipart_headers = poster.encode.multipart_encode(data)
